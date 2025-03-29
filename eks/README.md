@@ -1,21 +1,27 @@
 # EKS Infrastructure
 
-This directory contains the Terraform configuration for creating an Amazon EKS cluster. The configuration uses the official AWS EKS module to create a production-ready Kubernetes cluster.
+This directory contains the Terraform configuration for creating an Amazon EKS cluster with managed node groups and custom labels.
 
 ## Infrastructure Components
 
-The EKS configuration includes:
-
-- EKS Cluster with version 1.29
-- Managed node group:
-  - Instance type: t3.small
-  - Desired size: 2
-  - Min size: 1
-  - Max size: 3
+### EKS Cluster
+- Version: 1.29
 - Public endpoint access enabled
 - Cluster creator admin permissions enabled
-- Amazon Linux 2 (AL2) AMI for nodes
 - Automatic integration with VPC and private subnets
+
+### Managed Node Group
+- Instance type: t3.small
+- Desired size: 2
+- Min size: 1
+- Max size: 3
+- AMI: Amazon Linux 2 (AL2) x86_64
+- Custom labels:
+  ```yaml
+  environment = "test"
+  workload    = "web"
+  tier        = "frontend"
+  ```
 
 ## Usage
 
@@ -33,6 +39,23 @@ The EKS configuration includes:
    ```bash
    terraform apply
    ```
+
+4. Verify node labels:
+   ```bash
+   kubectl get nodes --show-labels
+   ```
+
+## Node Labels
+
+The node group is configured with the following labels:
+- `environment=test`: Identifies the environment
+- `workload=web`: Indicates the workload type
+- `tier=frontend`: Specifies the application tier
+
+These labels can be used for:
+- Node affinity rules in pod specifications
+- Pod scheduling preferences
+- Resource organization
 
 ## Outputs
 
@@ -60,4 +83,5 @@ The configuration provides the following outputs:
 - The cluster is created in the us-west-2 region
 - Nodes are deployed in private subnets
 - The cluster uses managed node groups for better maintainability
-- All necessary IAM roles and policies are automatically created 
+- All necessary IAM roles and policies are automatically created
+- Node labels are automatically applied to new nodes 
