@@ -1,14 +1,167 @@
-# brew tap hashicorp/tap
-# brew install hashicorp/tap/terraform
+# git --help
+# aws --version
+# aws configure
 # terraform -help
+# helm --help
+# kubectl version --client
+
+# cd into vpc folder
 # terraform init
 # terraform plan
 # terraform apply
 
-# brew install kubectl
-# aws eks update-kubeconfig --name infra-k8s-cluster --region us-west-2
-# kubectl get pods -n kube-system
+# cd into eks folder
+# terraform init
+# terraform plan
+# terraform apply
+
+# cd into app folder
+# aws eks update-kubeconfig --region us-west-2 --name infra-k8s-cluster
 # kubectl get all --all-namespaces
+
+# helm install nginx-demo .
+# kubectl get all --all-namespaces
+
+# kubectl exec -it nginx-f57549dcf-8vz5l -n nginx-demo -- curl localhost
+
+# node affinity
+#  kubectl get deployment nginx -n nginx-demo -o yaml
+#  kubectl get nodes --show-labels
+
+# Clean up
+# cd into app folder
+# helm uninstall nginx-demo
+
+# cd into eks folder
+# terraform destroy
+
+# cd into vpc folder
+# terraform destroy
+
+---
+
+# Kubernetes Infrastructure with AWS EKS
+
+This project demonstrates setting up a Kubernetes infrastructure using AWS EKS, including VPC setup, cluster configuration, and application deployment.
+
+## Prerequisites
+
+```bash
+# Check required tools
+git --help
+aws --version
+aws configure
+terraform -help
+helm --version
+kubectl version --client
+```
+
+## Project Structure
+
+```
+.
+├── vpc/                # VPC infrastructure
+│   ├── main.tf
+│   ├── variables.tf
+│   └── outputs.tf
+├── eks/               # EKS cluster configuration
+│   ├── main.tf
+│   ├── variables.tf
+│   └── outputs.tf
+└── app/               # Sample application
+    ├── Chart.yaml
+    ├── values.yaml
+    └── templates/
+        ├── deployment.yaml
+        ├── service.yaml
+        └── namespace.yaml
+```
+
+## Deployment Steps
+
+### 1. VPC Setup
+```bash
+cd vpc
+terraform init
+terraform plan
+terraform apply
+```
+
+### 2. EKS Cluster Setup
+```bash
+cd ../eks
+terraform init
+terraform plan
+terraform apply
+```
+
+### 3. Application Deployment
+```bash
+cd ../app
+# Configure kubectl for EKS
+aws eks update-kubeconfig --region us-west-2 --name infra-k8s-cluster
+
+# Verify cluster access
+kubectl get all --all-namespaces
+
+# Deploy application
+helm install nginx-demo .
+
+# Verify deployment
+kubectl get all --all-namespaces
+
+# Test the application
+kubectl exec -it $(kubectl get pod -n nginx-demo -l app=nginx -o jsonpath='{.items[0].metadata.name}') -n nginx-demo -- curl localhost
+```
+
+## Features
+
+### Infrastructure
+- VPC with public and private subnets
+- NAT Gateway for private subnet connectivity
+- EKS cluster with managed node groups
+- Security groups and IAM roles
+
+### Application
+- NGINX deployment with Helm
+- Resource limits and requests
+- Node affinity rules
+- Service exposure
+
+## Cleanup
+
+```bash
+# Remove application
+cd app
+helm uninstall nginx-demo
+
+# Remove EKS cluster
+cd ../eks
+terraform destroy
+
+# Remove VPC
+cd ../vpc
+terraform destroy
+```
+
+## Requirements
+
+| Tool | Version |
+|------|---------|
+| AWS CLI | Latest |
+| Terraform | >= 0.13.0 |
+| Helm | Latest |
+| kubectl | Latest |
+
+## Notes
+- The EKS cluster is created in us-west-2 region
+- Nodes are deployed in private subnets
+- Application uses Helm for deployment
+- Resource limits and node affinity are configurable via values.yaml
+
+# node affinity
+#  kubectl get deployment nginx -n nginx-demo -o yaml
+#  kubectl get nodes --show-labels
 
 # AWS VPC and EKS Infrastructure
 
