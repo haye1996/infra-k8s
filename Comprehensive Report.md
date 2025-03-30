@@ -26,14 +26,17 @@
 ### Prerequisites
 1. Required tools installed:
    ```bash
-   - git --help
-   - aws --version
-   - terraform -help
-   - helm --help
-   - kubectl version --client
+   git --help
+   aws --version
+   terraform -help
+   helm --help
+   kubectl version --client
    ```
 2. AWS CLI configured with appropriate credentials
+```bash
 aws configure
+aws configure list
+```
 
 ### Deployment Steps
 
