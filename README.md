@@ -1,40 +1,30 @@
-# git --help
-# aws --version
-# aws configure
-# terraform -help
-# helm --help
-# kubectl version --client
+# Preparation
+1. Have access to an environment where you can launch and terminate new hosts programmatically
+# Tasks
+1. Kubernetes Cluster Setup:
+a. Set up a multi-node Kubernetes cluster (control plane + data plane)
+i. You’re not expected to build a production-ready cluster — but you should document what would be needed to get there.
+ii. It is ok to use lightweight distribution like kubeadm, k3s or k0s
+b. Automate the set up process with good infra practice
+2. Deploy a Sample Application
+a. Choose a simple app (NGINX).
+b. Define:
+Helm chart
+Resource requests and limits
+Node affinity
+2. Documentation:
+a. Thoroughly document the design and outline potential areas for future enhancement.
+# Deliverables
+1. GitHub Repository✅:
+a. Submit a GitHub repository containing all the code utilized for the tasks.
 
-# cd into vpc folder
-# terraform init
-# terraform plan
-# terraform apply
+2. Comprehensive Report✅:
+a. High-level architecture overview (diagram included)
+b. Reproduction instructions (how to spin up the cluster)
+c. Design choices and tradeoffs
+d. What’s missing for production
 
-# cd into eks folder
-# terraform init
-# terraform plan
-# terraform apply
-
-# cd into app folder
-# aws eks update-kubeconfig --region us-west-2 --name infra-k8s-cluster
-# kubectl get all --all-namespaces
-
-# helm install nginx-demo .
-# kubectl get all --all-namespaces
-
-# kubectl exec -it nginx-f57549dcf-8vz5l -n nginx-demo -- curl localhost
-
-# node affinity
-#  kubectl get deployment nginx -n nginx-demo -o yaml
-#  kubectl get nodes --show-labels
-
-# Clean up
-# cd into app folder
-# helm uninstall nginx-demo
-
-# cd into eks folder
-# terraform destroy
-
-# cd into vpc folder
-# terraform destroy
-
+3. Recording showing✅:
+a. Cluster is up and running
+b. Nodes are registered
+c. App is successfully deployed
