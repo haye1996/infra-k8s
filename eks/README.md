@@ -1,3 +1,6 @@
+# Disclaimer
+This repository is for demonstration and educational purposes only. The code and documentation contained herein are not intended for commercial use without explicit approval from the repository owner. Any unauthorized commercial use is strictly prohibited.
+
 # EKS Infrastructure
 
 This directory contains the Terraform configuration for creating an Amazon EKS cluster with managed node groups and custom labels.

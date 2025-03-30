@@ -1,3 +1,6 @@
+# Disclaimer
+This repository is for demonstration and educational purposes only. The code and documentation contained herein are not intended for commercial use without explicit approval from the repository owner. Any unauthorized commercial use is strictly prohibited.
+
 # VPC Infrastructure
 
 This directory contains the Terraform configuration for creating a VPC infrastructure in AWS. The configuration uses the official AWS VPC module to create a production-ready VPC with public and private subnets.
