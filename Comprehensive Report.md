@@ -55,6 +55,7 @@ terraform init
 terraform plan
 terraform apply
 ```
+Note: deployments of VPC and EKS cluster may take 15 to 20mins.
 
 #### 3. Application Deployment
 ```bash
