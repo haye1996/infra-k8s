@@ -44,17 +44,8 @@
 
 This project demonstrates setting up a Kubernetes infrastructure using AWS EKS, including VPC setup, cluster configuration, and application deployment.
 
-## Prerequisites
-
-```bash
-# Check required tools
-git --help
-aws --version
-aws configure
-terraform -help
-helm --version
-kubectl version --client
-```
+## High-level architecture overview
+![Infra-k8s High Level Diagram](https://github.com/user-attachments/assets/ceca687a-b37f-47b1-a912-5227ad0d4b8a)
 
 ## Project Structure
 
@@ -76,6 +67,19 @@ kubectl version --client
         ├── service.yaml
         └── namespace.yaml
 ```
+
+## Prerequisites
+
+```bash
+# Check required tools
+git --help
+aws --version
+aws configure
+terraform -help
+helm --version
+kubectl version --client
+```
+
 
 ## Deployment Steps
 
