@@ -74,6 +74,10 @@ kubectl get all --all-namespaces
 
 # Test the application
 kubectl exec -it $(kubectl get pod -n nginx-demo -l app=nginx -o jsonpath='{.items[0].metadata.name}') -n nginx-demo -- curl localhost
+
+If above verification script did not work
+Just manually fetch the pod name or use "kubectl get pod -n nginx-demo -l app=nginx -o jsonpath='{.items[0].metadata.name}" to fetch the pod name like "nginx-7c95dd8546-cq95d"
+then do "kubectl exec -it nginx-7c95dd8546-cq95d -n nginx-demo -- curl localhost"
 ```
 
 ### Cleanup
